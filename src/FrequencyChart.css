@@ -1,0 +1,554 @@
+/* ==========================================
+   FrequencyChart.css - 用電分析頁面專用樣式
+   ========================================== */
+
+/* ==========================================
+   頻率分析頁面樣式
+   ========================================== */
+.frequency-chart-container {
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+  background: inherit;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* ==========================================
+   時間篩選器樣式
+   ========================================== */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+  gap: 24px;
+}
+
+/* 覆蓋原有的 page-title 樣式 */
+.frequency-chart-container .page-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  flex-shrink: 0;
+}
+
+.time-filter-container {
+  background: #1F2937;
+  border: 1px solid #374151;
+  border-radius: 12px;
+  padding: 16px;
+  min-width: 500px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.filter-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.date-range-group {
+  display: flex;
+  gap: 12px;
+}
+
+.time-range-group {
+  display: flex;
+  gap: 12px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.input-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #D1D5DB;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.input-icon {
+  color: #10B981;
+}
+
+.date-input,
+.time-select {
+  padding: 8px 12px;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #374151;
+  color: white;
+  transition: border-color 0.2s ease;
+  min-width: 140px;
+}
+
+.date-input:focus,
+.time-select:focus {
+  outline: none;
+  border-color: #10B981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+  background: #4B5563;
+}
+
+.time-select {
+  cursor: pointer;
+  min-width: 160px;
+}
+
+.filter-actions {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.filter-button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  white-space: nowrap;
+}
+
+.apply-button {
+  background: #10B981;
+  color: white;
+}
+
+.apply-button:hover {
+  background: #059669;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+}
+
+.reset-button {
+  background: #374151;
+  color: #D1D5DB;
+  border: 1px solid #4B5563;
+}
+
+.reset-button:hover {
+  background: #4B5563;
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================================
+   統計卡片樣式
+   ========================================== */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.stat-card.uniform-color {
+  background-color: #1F2937;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: left;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.stat-card.uniform-color .stat-title {
+  font-size: 14px;
+  color: #E5E7EB;
+  margin-bottom: 8px;
+  font-weight: normal;
+}
+
+.stat-card.uniform-color .stat-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  line-height: 1.2;
+}
+
+.stat-card.uniform-color .stat-unit {
+  font-size: 14px;
+  font-weight: normal;
+  color: #D1D5DB;
+  margin-left: 4px;
+}
+
+/* ==========================================
+   頁籤按鈕樣式
+   ========================================== */
+.tab-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #374151;
+  color: #D1D5DB;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.tab-button:hover {
+  background-color: #4B5563;
+  color: white;
+}
+
+.tab-button.active {
+  background-color: #059669;
+  color: white;
+}
+
+/* ==========================================
+   主圖表容器樣式
+   ========================================== */
+.main-chart {
+  min-height: 500px;
+  margin-bottom: 20px;
+}
+
+.chart-container.main-chart {
+  background-color: #1F2937;
+  border: 1px solid #374151;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.chart-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 15px;
+  padding-left: 5px;
+}
+
+/* ==========================================
+   分析摘要樣式
+   ========================================== */
+.analysis-summary {
+  background-color: #1F2937;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #374151;
+  margin-top: 20px;
+}
+
+.summary-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.summary-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.summary-section-title {
+  font-weight: 500;
+  color: #10B981;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.summary-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.summary-list li {
+  color: #D1D5DB;
+  font-size: 14px;
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+/* ==========================================
+   橫向滿版分析摘要樣式
+   ========================================== */
+.analysis-summary-fullwidth {
+  background-color: #1F2937;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #374151;
+  margin-bottom: 25px;
+  width: 100%;
+}
+
+.analysis-summary-fullwidth .summary-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 15px;
+}
+
+.summary-content-horizontal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.analysis-summary-fullwidth .summary-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.analysis-summary-fullwidth .summary-section-title {
+  font-weight: 500;
+  color: #10B981;
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+.analysis-summary-fullwidth .summary-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.analysis-summary-fullwidth .summary-list li {
+  color: #D1D5DB;
+  font-size: 14px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+  padding-left: 0;
+}
+
+/* ==========================================
+   表格資料區域樣式
+   ========================================== */
+.data-table-section {
+  background-color: #1F2937;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #374151;
+  margin-top: 25px;
+}
+
+.table-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 15px;
+  margin-top: 0;
+}
+
+.data-table-container {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #374151;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #1F2937;
+}
+
+.data-table th {
+  background-color: #374151;
+  color: #F3F4F6;
+  font-weight: 600;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 14px;
+  border-bottom: 2px solid #4B5563;
+}
+
+.data-table td {
+  padding: 12px 16px;
+  color: #D1D5DB;
+  font-size: 13px;
+  border-bottom: 1px solid #374151;
+}
+
+.data-table tbody tr:hover {
+  background-color: #374151;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ==========================================
+   狀態標籤樣式
+   ========================================== */
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  min-width: 50px;
+  display: inline-block;
+}
+
+.status-normal {
+  background-color: #10B981;
+  color: white;
+}
+
+.status-warning {
+  background-color: #F59E0B;
+  color: white;
+}
+
+.status-error {
+  background-color: #EF4444;
+  color: white;
+}
+
+/* ==========================================
+   響應式設計 - 用電分析頁面
+   ========================================== */
+@media (max-width: 1200px) {
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .time-filter-container {
+    width: 100%;
+    min-width: auto;
+  }
+  
+  .filter-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .date-range-group,
+  .time-range-group {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .filter-actions {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  
+  .stats-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .summary-content-horizontal {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .frequency-chart-container {
+    padding: 16px;
+  }
+  
+  .stats-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .stat-card.uniform-color {
+    min-height: 80px;
+    padding: 16px;
+  }
+  
+  .stat-card.uniform-color .stat-value {
+    font-size: 20px;
+  }
+  
+  .tab-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .tab-button {
+    padding: 12px 16px;
+  }
+  
+  .chart-container.main-chart {
+    padding: 16px;
+  }
+  
+  .main-chart {
+    min-height: 350px;
+  }
+  
+  .analysis-summary-fullwidth,
+  .data-table-section {
+    padding: 16px;
+  }
+  
+  .time-filter-container {
+    padding: 12px;
+  }
+  
+  .filter-button {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .date-input,
+  .time-select {
+    min-width: 120px;
+    font-size: 13px;
+  }
+  
+  .filter-actions {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .filter-button {
+    justify-content: center;
+  }
+  
+  .chart-title {
+    font-size: 16px;
+  }
+  
+  .data-table th,
+  .data-table td {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}

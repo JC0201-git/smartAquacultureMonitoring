@@ -1,0 +1,166 @@
+/* ==========================================
+   EQStatus.css - 設備狀態頁面專用樣式
+   ========================================== */
+
+/* ==========================================
+   iframe 容器樣式
+   ========================================== */
+.iframe-container {
+  width: 100vw;
+  width: 1400 px;
+  height: calc(85vh - 120px);
+  position: fixed;
+  top: 270px;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent; 
+  border-radius: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.iframe-header {
+  background-color: #374151;
+  padding: 15px 20px;
+  border-bottom: 1px solid #4B5563;
+}
+
+.iframe-title {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.iframe-wrapper {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+}
+
+.iframe-content {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+}
+
+.iframe-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  color: #9CA3AF;
+  font-size: 16px;
+}
+
+.iframe-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  color: #EF4444;
+  text-align: center;
+}
+
+.iframe-error h3 {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+}
+
+.iframe-error p {
+  margin: 0;
+  color: #9CA3AF;
+  font-size: 14px;
+}
+
+/* ==========================================
+   透明背景樣式 - 設備狀態專用
+   ========================================== */
+.iframe-container.transparent {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.iframe-wrapper.transparent {
+  background: transparent !important;
+  backdrop-filter: none !important;
+}
+
+.iframe-content.transparent {
+  background: transparent !important;
+  opacity: 1;
+}
+
+iframe {
+  background: transparent !important;
+}
+
+iframe body {
+  background: transparent !important;
+}
+
+/* ==========================================
+   響應式設計 - 設備狀態頁面
+   ========================================== */
+@media (max-width: 768px) {
+  .iframe-container {
+    border-radius: 0;
+    top: 100px;
+    height: calc(100vh - 100px);
+  }
+  
+  .iframe-wrapper {
+    height: 100%;
+  }
+  
+  .iframe-content {
+    height: 100%;
+  }
+  
+  .iframe-header {
+    padding: 12px 16px;
+  }
+  
+  .iframe-title {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .iframe-container {
+    top: 80px;
+    height: calc(100vh - 80px);
+  }
+  
+  .iframe-wrapper {
+    height: 100%;
+  }
+  
+  .iframe-content {
+    height: 100%;
+  }
+  
+  .iframe-loading {
+    height: 300px;
+    font-size: 14px;
+  }
+  
+  .iframe-error {
+    height: 300px;
+  }
+  
+  .iframe-error h3 {
+    font-size: 16px;
+  }
+  
+  .iframe-error p {
+    font-size: 12px;
+  }
+}
