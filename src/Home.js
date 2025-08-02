@@ -1,25 +1,53 @@
 import React from 'react';
-import './EQStatus.css';
+import './Home.css';
+import temperatureSvg from './graphicfile/temperature.svg';
+import NH2Svg from './graphicfile/NH2.svg';
+import O2Svg from './graphicfile/O2.svg';
+import phSvg from './graphicfile/ph.svg';
+import saltSvg from './graphicfile/salt.svg';
+import waterpoolImg from './graphicfile/waterpool.svg';
 
 const Home = () => {
-  // iframe URL 配置
-  const equipmentStatusUrl = 'http://localhost:1880/ui/#!/0?socketid=0VSjskW1n5N5bsTXAAAB';
-
   return (
-    <div className="iframe-container transparent">
-      <div className="iframe-wrapper transparent">
-        <iframe
-          src={equipmentStatusUrl}
-          title="設備狀態"
-          className="iframe-content transparent"
-          allowFullScreen
-          style={{
-            backgroundColor: 'transparent',
-            background: 'transparent',
-            border: 'none'
-          }}
-        />
-      </div>
+    <div className="home-container">
+
+    {/* 中央水池圖片 */}
+    <img 
+      src={waterpoolImg} 
+      alt="水池圖" 
+      className="waterpool-img"
+    />
+
+    <img 
+      src={phSvg} 
+      alt="ph監控" 
+      className="ph-svg"
+    />  
+
+    <img 
+      src={temperatureSvg} 
+      alt="trmperature監控" 
+      className="trmperature-svg"
+    /> 
+
+    <img 
+      src={O2Svg} 
+      alt="O2監控" 
+      className="O2-svg"
+    />
+
+    <img 
+      src={saltSvg} 
+      alt="salt監控" 
+      className="salt-svg"
+    />
+
+    <img 
+      src={NH2Svg} 
+      alt="NH2監控" 
+      className="NH2-svg"
+    />
+
     </div>
   );
 };
