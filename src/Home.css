@@ -27,47 +27,323 @@
   z-index: 0;
 }
 
-.ph-svg {
+.ph-svg-container {
   position: absolute;
-  right: 1350px;
-  top: 45px;
+  right: 1380px;
+  top: 50px;
   /* border: 1px solid #ffff00; */
   padding: 5px;
   z-index: 1;
 }
 
-.trmperature-svg {
+.ph-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.temperature-svg-container {
   position: absolute;
   right: 900px;
-  top: 30px;
+  top: 35px;
   /* border: 1px solid #ff00ff; */
   padding: 5px;
   z-index: 1;
 }
 
-.O2-svg {
+.trmperature-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.o2-svg-container {
   position: absolute;
   right: 450px;
-  top: 20px;
+  top: 25px;
   /* border: 1px solid #00ffff; */
   padding: 5px;
   z-index: 1;
 }
 
-.salt-svg {
+.O2-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.salt-svg-container {
   position: absolute;
-  right: 20px;
-  top: 95px;
+  right: 35px;
+  top: 75px;
   /* border: 1px solid #ffa500; */
   padding: 5px;
   z-index: 1;
 }
 
-.NH2-svg {
+.salt-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.nh2-svg-container {
   position: absolute;
-  right: 20px;
-  top: 280px;
+  right: 50px;
+  top: 330px;
   /* border: 1px solid #800080; */
   padding: 5px;
   z-index: 1;
+}
+
+.NH2-svg {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* ==========================================
+   測試數據傳送面板樣式
+   ========================================== */
+.show-test-panel-btn {
+  position: absolute;
+  bottom: 320px;
+  left: 20px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.show-test-panel-btn:hover {
+  background: linear-gradient(135deg, #0056b3, #004085);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.show-test-panel-btn:active {
+  transform: translateY(0);
+}
+.test-data-panel {
+  position: absolute;
+  bottom: 300px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  min-width: 380px;
+  max-width: 420px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.panel-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+  gap: 8px;
+}
+
+.panel-title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.panel-header h4 {
+  margin: 0;
+  color: #333;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.close-panel-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 28px;
+}
+
+.close-panel-btn:hover {
+  background-color: rgba(255, 0, 0, 0.1);
+  color: #ff4444;
+  transform: scale(1.1);
+}
+
+.close-panel-btn:active {
+  transform: scale(0.95);
+}
+
+.send-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.status-message {
+  background: #f8f9fa;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-weight: 500;
+  color: #000000;
+}
+
+.last-sent {
+  color: #666;
+  font-size: 11px;
+}
+
+.test-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.test-btn {
+  padding: 10px 8px;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-height: 60px;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.test-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.test-btn:active {
+  transform: translateY(0);
+}
+
+.test-btn.primary {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  grid-column: span 2;
+}
+
+.test-btn.primary:hover {
+  background: linear-gradient(135deg, #0056b3, #004085);
+}
+
+.test-btn.sensor {
+  background: linear-gradient(135deg, #28a745, #1e7e34);
+  color: white;
+}
+
+.test-btn.sensor:hover {
+  background: linear-gradient(135deg, #1e7e34, #155724);
+}
+
+.test-btn.control {
+  background: linear-gradient(135deg, #ffc107, #e0a800);
+  color: #212529;
+}
+
+.test-btn.control:hover {
+  background: linear-gradient(135deg, #e0a800, #d39e00);
+}
+
+.test-btn.status {
+  background: linear-gradient(135deg, #17a2b8, #117a8b);
+  color: white;
+}
+
+.test-btn.status:hover {
+  background: linear-gradient(135deg, #117a8b, #0c5460);
+}
+
+.test-btn.alarm {
+  background: linear-gradient(135deg, #dc3545, #c82333);
+  color: white;
+}
+
+.test-btn.alarm:hover {
+  background: linear-gradient(135deg, #c82333, #a71e2a);
+}
+
+.test-btn.auto {
+  background: linear-gradient(135deg, #6c757d, #545b62);
+  color: white;
+  grid-column: span 2;
+}
+
+.test-btn.auto:hover {
+  background: linear-gradient(135deg, #545b62, #3d4142);
+}
+
+.test-btn.auto.active {
+  background: linear-gradient(135deg, #fd7e14, #e55100);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* 響應式設計 */
+@media (max-width: 1400px) {
+  .test-data-panel {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    margin: 20px auto;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .test-data-panel {
+    min-width: auto;
+    width: calc(100% - 40px);
+    margin: 20px;
+  }
+  
+  .test-buttons-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .test-btn.primary,
+  .test-btn.auto {
+    grid-column: span 2;
+  }
 }

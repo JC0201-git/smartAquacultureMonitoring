@@ -1,0 +1,275 @@
+.mqtt-settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.mqtt-settings-modal {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mqtt-settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e0e0e0;
+  background-color: #f8f9fa;
+  border-radius: 12px 12px 0 0;
+}
+
+.mqtt-settings-header h3 {
+  margin: 0;
+  color: #333;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+}
+
+.close-btn:hover {
+  background-color: #e0e0e0;
+  color: #333;
+}
+
+.mqtt-settings-content {
+  padding: 24px;
+}
+
+.settings-section {
+  margin-bottom: 24px;
+}
+
+.settings-section h4 {
+  margin: 0 0 16px 0;
+  color: #555;
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 4px;
+}
+
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #555;
+  font-size: 14px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  box-sizing: border-box;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.input-group small {
+  display: block;
+  margin-top: 4px;
+  color: #666;
+  font-size: 12px;
+}
+
+.checkbox-group {
+  margin-bottom: 16px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 500;
+  color: #555;
+  font-size: 14px;
+}
+
+.checkbox-label input[type="checkbox"] {
+  display: none;
+}
+
+.checkmark {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  margin-right: 8px;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.checkbox-label input[type="checkbox"]:checked + .checkmark::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-group small {
+  display: block;
+  margin-top: 4px;
+  margin-left: 26px;
+  color: #666;
+  font-size: 12px;
+}
+
+.mqtt-settings-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-top: 1px solid #e0e0e0;
+  background-color: #f8f9fa;
+  border-radius: 0 0 12px 12px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.reset-btn,
+.cancel-btn,
+.save-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+.reset-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.reset-btn:hover {
+  background-color: #545b62;
+}
+
+.cancel-btn {
+  background-color: #e9ecef;
+  color: #495057;
+  border: 1px solid #ced4da;
+}
+
+.cancel-btn:hover {
+  background-color: #dee2e6;
+}
+
+.save-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #0056b3;
+}
+
+.reset-btn:active,
+.cancel-btn:active,
+.save-btn:active {
+  transform: translateY(1px);
+}
+
+.topic-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.topic-grid .input-group {
+  margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+  .mqtt-settings-modal {
+    width: 95%;
+    margin: 20px;
+  }
+  
+  .input-row,
+  .topic-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .mqtt-settings-footer {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .action-buttons {
+    width: 100%;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,263 @@
+.mqtt-console {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.mqtt-console h2 {
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.mqtt-console h3 {
+  color: #555;
+  margin-bottom: 15px;
+  font-size: 18px;
+  border-bottom: 2px solid #e0e0e0;
+  padding-bottom: 5px;
+}
+
+.connection-section,
+.publish-section,
+.subscribe-section,
+.messages-section {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #555;
+}
+
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.connection-controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.connect-btn,
+.disconnect-btn,
+.publish-btn,
+.subscribe-btn,
+.sensor-btn,
+.unsubscribe-btn,
+.clear-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.connect-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.connect-btn:hover {
+  background-color: #218838;
+}
+
+.disconnect-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.disconnect-btn:hover {
+  background-color: #c82333;
+}
+
+.publish-btn,
+.sensor-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.publish-btn:hover,
+.sensor-btn:hover {
+  background-color: #0056b3;
+}
+
+.subscribe-btn {
+  background-color: #17a2b8;
+  color: white;
+  margin-left: 10px;
+}
+
+.subscribe-btn:hover {
+  background-color: #138496;
+}
+
+.unsubscribe-btn {
+  background-color: #ffc107;
+  color: #212529;
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+.unsubscribe-btn:hover {
+  background-color: #e0a800;
+}
+
+.clear-btn {
+  background-color: #6c757d;
+  color: white;
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+.clear-btn:hover {
+  background-color: #545b62;
+}
+
+.status {
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.status.connected {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status.disconnected {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.active-subscriptions {
+  margin-top: 15px;
+}
+
+.active-subscriptions h4 {
+  margin-bottom: 10px;
+  color: #666;
+  font-size: 14px;
+}
+
+.subscription-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  border: 1px solid #e0e0e0;
+}
+
+.subscription-item span {
+  font-family: monospace;
+  color: #495057;
+}
+
+.messages-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.messages-list {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background: white;
+}
+
+.no-messages {
+  padding: 20px;
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.message-item {
+  border-bottom: 1px solid #e0e0e0;
+  padding: 15px;
+}
+
+.message-item:last-child {
+  border-bottom: none;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.topic {
+  font-family: monospace;
+  background-color: #e9ecef;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+  color: #495057;
+}
+
+.timestamp {
+  font-size: 11px;
+  color: #6c757d;
+}
+
+.message-content {
+  background-color: #f8f9fa;
+  padding: 8px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 12px;
+  word-break: break-all;
+  white-space: pre-wrap;
+}
