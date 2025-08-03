@@ -4,120 +4,18 @@ import phSvg from './graphicfile/ph.svg';
 import saltSvg from './graphicfile/salt.svg';
 import waterpoolImg from './graphicfile/waterpool.svg';
 import { useMQTT } from './useMQTT';
-import { generateSensorData, generateIndividualSensorData, createControlMessage, createStatusMessage, createAlarmMessage } from './mqttTopics';
 
 const Home = ({ mqttSettings }) => {
 
-  const { isConnected, connect, disconnect, publish, subscribe, messages } = useMQTT(mqttSettings.brokerUrl, mqttSettings);
-  const [lastSentTime, setLastSentTime] = useState(null);
-  const [sendStatus, setSendStatus] = useState('');
-  const [isAutoSending, setIsAutoSending] = useState(false);
-  const [autoSendInterval, setAutoSendInterval] = useState(null);
+  const { isConnected, subscribe, messages } = useMQTT(mqttSettings.brokerUrl, mqttSettings);
   const [currentTemperature, setCurrentTemperature] = useState('--.-');
   const [currentNH2, setCurrentNH2] = useState('--.-');
   const [currentO2, setCurrentO2] = useState('--.-');
   const [currentPH, setCurrentPH] = useState('--.-');
   const [currentSalt, setCurrentSalt] = useState('--.-');
   const [temperatureUpdateInterval, setTemperatureUpdateInterval] = useState(null);
-  const [isTestPanelVisible, setIsTestPanelVisible] = useState(true);
 
 
-  const sendTestData = async (dataType) => {
-    if (!isConnected) {
-      setSendStatus('❌ 未連線，無法發送數據');
-      return;
-    }
-
-    setSendStatus('📡 發送中...');
-    
-    try {
-      let topic, data;
-      
-      switch (dataType) {
-        case 'all':
-          topic = mqttSettings.topics.sensorData;
-          data = generateSensorData();
-          break;
-        case 'temperature':
-          topic = mqttSettings.topics.temperature;
-          data = generateIndividualSensorData('temperature');
-          break;
-        case 'ph':
-          topic = mqttSettings.topics.ph;
-          data = generateIndividualSensorData('ph');
-          break;
-        case 'salinity':
-          topic = mqttSettings.topics.salinity;
-          data = generateIndividualSensorData('salinity');
-          break;
-        case 'oxygen':
-          topic = mqttSettings.topics.oxygen;
-          data = generateIndividualSensorData('oxygen');
-          break;
-        case 'ammonia':
-          topic = mqttSettings.topics.ammonia;
-          data = generateIndividualSensorData('ammonia');
-          break;
-        case 'control':
-          topic = mqttSettings.topics.control;
-          data = createControlMessage('pump', 'start', { duration: 300 });
-          break;
-        case 'status':
-          topic = mqttSettings.topics.status;
-          data = createStatusMessage('online', { pump: 'running', heater: 'off' });
-          break;
-        case 'alarm':
-          topic = mqttSettings.topics.alarms;
-          data = createAlarmMessage('warning', '溫度過高', 28.5, 28.0);
-          break;
-        default:
-          topic = mqttSettings.topics.sensorData;
-          data = generateSensorData();
-      }
-
-      const success = await publish(topic, JSON.stringify(data));
-      
-      if (success) {
-        setLastSentTime(new Date());
-        setSendStatus('✅ 數據發送成功');
-        
-        // 更新溫度顯示
-        if (dataType === 'all' || dataType === 'temperature') {
-          const tempValue = dataType === 'all' ? data.temperature : data.value;
-          setCurrentTemperature(tempValue);
-        }
-        
-        setTimeout(() => setSendStatus(''), 3000);
-      } else {
-        setSendStatus('❌ 數據發送失敗');
-        setTimeout(() => setSendStatus(''), 3000);
-      }
-    } catch (error) {
-      console.error('發送測試數據失敗:', error);
-      setSendStatus('❌ 發送過程中發生錯誤');
-      setTimeout(() => setSendStatus(''), 3000);
-    }
-  };
-
-  const toggleAutoSend = () => {
-    if (isAutoSending) {
-      if (autoSendInterval) {
-        clearInterval(autoSendInterval);
-        setAutoSendInterval(null);
-      }
-      setIsAutoSending(false);
-      setSendStatus('⏹️ 自動傳送已停止');
-    } else {
-      const interval = setInterval(() => {
-        sendTestData('all');
-      }, 5000); // 每5秒發送一次
-      
-      setAutoSendInterval(interval);
-      setIsAutoSending(true);
-      setSendStatus('🔄 自動傳送已啟動 (每5秒)');
-    }
-    setTimeout(() => setSendStatus(''), 3000);
-  };
 
 
   // 處理 MQTT 收到的感測器消息
@@ -273,135 +171,15 @@ const Home = ({ mqttSettings }) => {
 
   React.useEffect(() => {
     return () => {
-      if (autoSendInterval) {
-        clearInterval(autoSendInterval);
-      }
       if (temperatureUpdateInterval) {
         clearInterval(temperatureUpdateInterval);
       }
     };
-  }, [autoSendInterval, temperatureUpdateInterval]);
+  }, [temperatureUpdateInterval]);
 
   return (
     <div className="home-container">
 
-      {/* 測試數據傳送面板 */}
-      {isConnected && !isTestPanelVisible && (
-        <button 
-          className="show-test-panel-btn"
-          onClick={() => setIsTestPanelVisible(true)}
-          title="顯示測試數據面板"
-        >
-          📡 測試面板
-        </button>
-      )}
-
-      {isConnected && isTestPanelVisible && (
-        <div className="test-data-panel">
-          <div className="panel-header">
-            <div className="panel-title-section">
-              <h4>📡 測試數據傳送</h4>
-              <button 
-                className="close-panel-btn"
-                onClick={() => setIsTestPanelVisible(false)}
-                title="關閉面板"
-              >
-                ✕
-              </button>
-            </div>
-            <div className="send-status">
-              {sendStatus && <span className="status-message">{sendStatus}</span>}
-              {lastSentTime && (
-                <span className="last-sent">
-                  上次發送: {lastSentTime.toLocaleTimeString()}
-                </span>
-              )}
-            </div>
-          </div>
-          
-          <div className="test-buttons-grid">
-            <button 
-              className="test-btn primary" 
-              onClick={() => sendTestData('all')}
-              title="發送完整感測器數據"
-            >
-              🌊 完整數據
-            </button>
-            
-            <button 
-              className="test-btn sensor" 
-              onClick={() => sendTestData('temperature')}
-              title="發送溫度數據"
-            >
-              🌡️ 溫度
-            </button>
-            
-            <button 
-              className="test-btn sensor" 
-              onClick={() => sendTestData('ph')}
-              title="發送PH值數據"
-            >
-              🧪 PH值
-            </button>
-            
-            <button 
-              className="test-btn sensor" 
-              onClick={() => sendTestData('salinity')}
-              title="發送鹽度數據"
-            >
-              🧂 鹽度
-            </button>
-            
-            <button 
-              className="test-btn sensor" 
-              onClick={() => sendTestData('oxygen')}
-              title="發送氧氣數據"
-            >
-              💨 氧氣
-            </button>
-            
-            <button 
-              className="test-btn sensor" 
-              onClick={() => sendTestData('ammonia')}
-              title="發送氨氮數據"
-            >
-              ⚗️ 氨氮
-            </button>
-            
-            <button 
-              className="test-btn control" 
-              onClick={() => sendTestData('control')}
-              title="發送控制指令"
-            >
-              🎛️ 控制
-            </button>
-            
-            <button 
-              className="test-btn status" 
-              onClick={() => sendTestData('status')}
-              title="發送系統狀態"
-            >
-              📊 狀態
-            </button>
-            
-            <button 
-              className="test-btn alarm" 
-              onClick={() => sendTestData('alarm')}
-              title="發送警報測試"
-            >
-              🚨 警報
-            </button>
-            
-            <button 
-              className={`test-btn auto ${isAutoSending ? 'active' : ''}`}
-              onClick={toggleAutoSend}
-              title={isAutoSending ? '停止自動傳送' : '開始自動傳送 (每5秒)'}
-            >
-              {isAutoSending ? '⏹️ 停止自動' : '🔄 自動傳送'}
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* 中央水池圖片 */}
       <img 

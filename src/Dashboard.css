@@ -1,4 +1,20 @@
 /* Dashboard.css - 儀表板專用樣式 */
+
+/* CSS 變量定義 - 響應式設計基礎 */
+:root {
+  --header-height: 320px;
+  --header-padding: 20px;
+  --title-font-size: 90px;
+  --title-letter-spacing: 12px;
+  --subtitle-font-size: 60px;
+  --subtitle-letter-spacing: 8px;
+  --panel-bottom-offset: 5px;
+  --panel-side-offset: 5px;
+  --panel-height: 48px;
+  --test-panel-width: 400px;
+  --test-panel-max-height: 200px;
+}
+
 .dashboard {
   background-image: url('./background.png');
   background-size: cover;
@@ -32,20 +48,21 @@
    ========================================== */
 .header {
   background-color: transparent;
-  padding: 20px 20px;
+  padding: var(--header-padding) var(--header-padding);
   border-bottom: none;
   display: flex;
   justify-content: center;
   align-items: flex-start;
   position: relative;
   /* border: 2px solid #00ff00; */
-  height: 200px;
+  height: var(--header-height);
 }
 
 .header-logo {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   /* border: 1px solid #ff6600; */
 }
 
@@ -60,26 +77,387 @@
 
 .header-title {
   color: white;
-  font-size: 60px;
+  font-size: var(--title-font-size);
   font-weight: bold;
-  letter-spacing: 12px;
+  letter-spacing: var(--title-letter-spacing);
   /* border: 1px solid #ffff99; */
+}
+
+.header-subtitle {
+  color: rgba(52, 152, 219, 0.8);
+  font-size: var(--subtitle-font-size);
+  font-weight: 600;
+  letter-spacing: var(--subtitle-letter-spacing);
+  font-family: 'Arial', 'Helvetica', sans-serif;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  margin-top: -10px;
+}
+
+/* MQTT 控制區域 */
+.mqtt-control-area {
+  position: absolute;
+  bottom: var(--panel-bottom-offset);
+  left: var(--panel-side-offset);
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+/* MQTT 面板切換按鈕 */
+.mqtt-panel-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.toggle-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 12px 8px;
+  border-radius: 12px 0 0 12px;
+  cursor: pointer;
+  font-size: 14px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  height: var(--panel-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+}
+
+.toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateX(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Header MQTT 面板樣式 */
 .header-mqtt-panel {
-  position: absolute;
-  bottom: 5px;
-  left: 5px;
   display: flex;
   align-items: center;
   gap: 16px;
   background: rgba(255, 255, 255, 0.15);
   padding: 12px 16px;
-  border-radius: 12px;
+  border-radius: 0 12px 12px 0;
   backdrop-filter: blur(10px);
   /* border: 2px solid #ff3366; */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  height: var(--panel-height);
+}
+
+/* 測試數據傳送面板區域 */
+.test-control-area {
+  position: absolute;
+  bottom: var(--panel-bottom-offset);
+  right: var(--panel-side-offset);
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+/* 測試面板切換按鈕 */
+.test-panel-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.test-toggle-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 12px 8px;
+  border-radius: 12px 0 0 12px;
+  cursor: pointer;
+  font-size: 14px;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  height: var(--panel-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+}
+
+.test-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateX(2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Header 測試面板樣式 */
+.header-test-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  padding: 12px 16px;
+  border-radius: 0 0 12px 12px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  min-width: var(--test-panel-width);
+  max-height: var(--test-panel-max-height);
+  overflow-y: auto;
+}
+
+.test-panel-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.test-panel-header h4 {
+  margin: 0;
+  font-size: 14px;
+  color: white;
+  font-weight: 600;
+}
+
+.test-status-message {
+  font-size: 12px;
+  color: #4ade80;
+  font-weight: 500;
+}
+
+.test-last-sent {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.test-buttons-compact {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.test-btn-compact {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  padding: 6px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 28px;
+}
+
+.test-btn-compact:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.test-btn-compact.primary {
+  background: rgba(16, 185, 129, 0.6);
+}
+
+.test-btn-compact.primary:hover {
+  background: rgba(16, 185, 129, 0.8);
+}
+
+.test-btn-compact.sensor {
+  background: rgba(59, 130, 246, 0.6);
+}
+
+.test-btn-compact.sensor:hover {
+  background: rgba(59, 130, 246, 0.8);
+}
+
+.test-btn-compact.control {
+  background: rgba(249, 115, 22, 0.6);
+}
+
+.test-btn-compact.control:hover {
+  background: rgba(249, 115, 22, 0.8);
+}
+
+.test-btn-compact.status {
+  background: rgba(168, 85, 247, 0.6);
+}
+
+.test-btn-compact.status:hover {
+  background: rgba(168, 85, 247, 0.8);
+}
+
+.test-btn-compact.alarm {
+  background: rgba(239, 68, 68, 0.6);
+}
+
+.test-btn-compact.alarm:hover {
+  background: rgba(239, 68, 68, 0.8);
+}
+
+.test-btn-compact.auto {
+  background: rgba(156, 163, 175, 0.6);
+}
+
+.test-btn-compact.auto:hover {
+  background: rgba(156, 163, 175, 0.8);
+}
+
+.test-btn-compact.auto.active {
+  background: rgba(34, 197, 94, 0.8);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* ==========================================
+   響應式設計 - 不同解析度適配
+   ========================================== */
+
+/* 基礎設計 - 2560x1664 (16:10) - 使用預設值 */
+@media screen and (min-width: 2400px) and (min-height: 1600px) {
+  :root {
+    --header-height: 320px;
+    --header-padding: 20px;
+    --title-font-size: 90px;
+    --title-letter-spacing: 12px;
+    --subtitle-font-size: 60px;
+    --subtitle-letter-spacing: 8px;
+    --panel-bottom-offset: 5px;
+    --panel-side-offset: 5px;
+    --panel-height: 48px;
+    --test-panel-width: 400px;
+    --test-panel-max-height: 200px;
+  }
+}
+
+/* 2560x1440 (16:9) - 較矮的螢幕 */
+@media screen and (width: 2560px) and (height: 1440px) {
+  :root {
+    --header-height: 256px;
+    --header-padding: 15px;
+    --title-font-size: 72px;
+    --title-letter-spacing: 10px;
+    --subtitle-font-size: 48px;
+    --subtitle-letter-spacing: 6px;
+    --panel-bottom-offset: 5px;
+    --panel-side-offset: 5px;
+    --panel-height: 48px;
+    --test-panel-width: 380px;
+    --test-panel-max-height: 150px;
+  }
+  
+  .test-buttons-compact {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+  }
+  
+  .test-btn-compact {
+    padding: 5px 6px;
+    font-size: 10px;
+    min-height: 26px;
+  }
+}
+
+/* 通用響應式 - 寬螢幕但高度較小 */
+@media screen and (min-width: 2400px) and (max-height: 1500px) {
+  :root {
+    --header-height: 224px;
+    --header-padding: 12px;
+    --title-font-size: 63px;
+    --title-letter-spacing: 8px;
+    --subtitle-font-size: 42px;
+    --subtitle-letter-spacing: 5px;
+    --panel-bottom-offset: 3px;
+    --panel-side-offset: 3px;
+    --panel-height: 42px;
+    --test-panel-width: 360px;
+    --test-panel-max-height: 120px;
+  }
+  
+  .header-test-panel {
+    padding: 10px 14px;
+  }
+  
+  .test-panel-header h4 {
+    font-size: 13px;
+  }
+  
+  .test-status-message {
+    font-size: 11px;
+  }
+  
+  .test-last-sent {
+    font-size: 10px;
+  }
+}
+
+/* 較小解析度適配 */
+@media screen and (max-width: 2400px) {
+  :root {
+    --header-height: 192px;
+    --header-padding: 10px;
+    --title-font-size: 54px;
+    --title-letter-spacing: 6px;
+    --subtitle-font-size: 36px;
+    --subtitle-letter-spacing: 4px;
+    --panel-bottom-offset: 2px;
+    --panel-side-offset: 2px;
+    --panel-height: 36px;
+    --test-panel-width: 320px;
+    --test-panel-max-height: 100px;
+  }
+  
+  .header-mqtt-panel,
+  .toggle-btn,
+  .test-toggle-btn {
+    padding: 8px 12px;
+  }
+  
+  .header-test-panel {
+    padding: 8px 12px;
+  }
+  
+  .test-buttons-compact {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+  }
+  
+  .test-btn-compact {
+    padding: 4px 6px;
+    font-size: 9px;
+    min-height: 24px;
+  }
+}
+
+/* 垂直空間優化 */
+@media screen and (max-height: 900px) {
+  :root {
+    --header-height: 128px;
+    --header-padding: 8px;
+    --title-font-size: 42px;
+    --title-letter-spacing: 4px;
+    --subtitle-font-size: 28px;
+    --subtitle-letter-spacing: 3px;
+    --panel-height: 32px;
+    --test-panel-width: 300px;
+    --test-panel-max-height: 80px;
+  }
+  
+  .test-buttons-compact {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .mqtt-status-compact {
